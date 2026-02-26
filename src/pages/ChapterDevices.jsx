@@ -53,11 +53,16 @@ export default function ChapterDevices() {
 
   useEffect(() => {
     if (percent === 100 && !celebrated) {
-      setBurst(true)
       setCelebrated(true)
+    }
+  }, [percent, celebrated])
+
+  useEffect(() => {
+    if (celebrated) {
+      setBurst(true)
       earnAchievement('ch2_complete')
     }
-  }, [percent])
+  }, [celebrated])
 
   return (
     <div className="lined-paper min-h-screen">

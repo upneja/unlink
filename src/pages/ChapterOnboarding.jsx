@@ -56,7 +56,10 @@ export default function ChapterOnboarding() {
   const navigate = useNavigate()
   const { setAssessment, diary } = useDiary()
   const [answers, setAnswers] = useState(diary.assessment)
-  const [currentQ, setCurrentQ] = useState(0)
+  const [currentQ, setCurrentQ] = useState(() => {
+    const answeredCount = QUESTIONS.filter(q => diary.assessment[q.id] !== null).length
+    return Math.min(answeredCount, QUESTIONS.length - 1)
+  })
   const [showSummary, setShowSummary] = useState(diary.assessmentComplete)
   const [burst, setBurst] = useState(false)
 

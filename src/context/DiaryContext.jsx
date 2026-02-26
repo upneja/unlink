@@ -17,6 +17,7 @@ const defaultState = {
   },
   achievements: [],
   dearFutureMe: '',
+  safetyCircle: '',
   assessmentComplete: false,
 }
 
@@ -70,13 +71,18 @@ export function DiaryProvider({ children }) {
   }
 
   function earnAchievement(id) {
-    if (!diary.achievements.includes(id)) {
-      setDiary(prev => ({ ...prev, achievements: [...prev.achievements, id] }))
-    }
+    setDiary(prev => {
+      if (prev.achievements.includes(id)) return prev
+      return { ...prev, achievements: [...prev.achievements, id] }
+    })
   }
 
   function setDearFutureMe(text) {
     setDiary(prev => ({ ...prev, dearFutureMe: text }))
+  }
+
+  function setSafetyCircle(text) {
+    setDiary(prev => ({ ...prev, safetyCircle: text }))
   }
 
   function resetAll() {
@@ -92,6 +98,7 @@ export function DiaryProvider({ children }) {
       chapterProgress,
       earnAchievement,
       setDearFutureMe,
+      setSafetyCircle,
       resetAll,
     }}>
       {children}

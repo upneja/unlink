@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
 import DiaryEntry from '../components/DiaryEntry'
+import { useDiary } from '../context/DiaryContext'
 
 const HOTLINES = [
   {
@@ -53,6 +55,13 @@ const EVIDENCE_TIPS = [
 
 export default function ChapterResources() {
   const navigate = useNavigate()
+  const { diary, setSafetyCircle } = useDiary()
+  const [safetyText, setSafetyText] = useState(diary.safetyCircle || '')
+
+  function handleSafetyChange(e) {
+    setSafetyText(e.target.value)
+    setSafetyCircle(e.target.value)
+  }
 
   return (
     <div className="lined-paper min-h-screen">
@@ -143,6 +152,8 @@ export default function ChapterResources() {
             Who are the people I trust? Write them here.
           </p>
           <textarea
+            value={safetyText}
+            onChange={handleSafetyChange}
             className="w-full p-3 rounded-lg font-handwriting text-sm resize-none"
             style={{
               background: 'rgba(255,255,255,0.7)',

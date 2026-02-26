@@ -3,11 +3,7 @@ import { useEffect, useState } from 'react'
 
 const EMOJIS = ['⭐', '💜', '🦋', '✨', '🔑', '💖', '🌸', '🎉']
 
-function Particle({ emoji, delay }) {
-  const x = (Math.random() - 0.5) * 300
-  const y = (Math.random() - 0.5) * 300
-  const rotation = Math.random() * 720 - 360
-
+function Particle({ emoji, delay, x, y, rotation }) {
   return (
     <motion.div
       className="absolute text-2xl pointer-events-none"
@@ -30,6 +26,9 @@ export default function StickerBurst({ trigger, onComplete }) {
         id: i,
         emoji: EMOJIS[i % EMOJIS.length],
         delay: i * 0.04,
+        x: (Math.random() - 0.5) * 300,
+        y: (Math.random() - 0.5) * 300,
+        rotation: Math.random() * 720 - 360,
       }))
       setParticles(newParticles)
       const t = setTimeout(() => {
@@ -44,7 +43,7 @@ export default function StickerBurst({ trigger, onComplete }) {
     <div className="fixed inset-0 pointer-events-none z-50 flex items-center justify-center">
       <AnimatePresence>
         {particles.map(p => (
-          <Particle key={p.id} emoji={p.emoji} delay={p.delay} />
+          <Particle key={p.id} emoji={p.emoji} delay={p.delay} x={p.x} y={p.y} rotation={p.rotation} />
         ))}
       </AnimatePresence>
     </div>

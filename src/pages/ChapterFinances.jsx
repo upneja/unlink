@@ -48,11 +48,16 @@ export default function ChapterFinances() {
 
   useEffect(() => {
     if (percent === 100 && !celebrated) {
-      setBurst(true)
       setCelebrated(true)
+    }
+  }, [percent, celebrated])
+
+  useEffect(() => {
+    if (celebrated) {
+      setBurst(true)
       earnAchievement('ch4_complete')
     }
-  }, [percent])
+  }, [celebrated])
 
   return (
     <div className="lined-paper min-h-screen">
