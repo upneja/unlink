@@ -8,13 +8,6 @@ import ChapterFinances from './pages/ChapterFinances'
 import ChapterResources from './pages/ChapterResources'
 import FreshStartDashboard from './pages/FreshStartDashboard'
 
-// Stub pages — will be replaced in subsequent tasks
-const Stub = ({ title, color }) => (
-  <div className="p-8 pl-14 font-handwriting text-2xl" style={{ color: color || '#4A4A4A' }}>
-    {title}
-  </div>
-)
-
 function AppInner() {
   const location = useLocation()
 
