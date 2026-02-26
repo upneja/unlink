@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import DiaryBook from './components/DiaryBook'
 import DiaryCover from './pages/DiaryCover'
 import ChapterOnboarding from './pages/ChapterOnboarding'
+import ChapterDevices from './pages/ChapterDevices'
 
 // Stub pages — will be replaced in subsequent tasks
 const Stub = ({ title, color }) => (
@@ -18,7 +19,7 @@ function AppInner() {
       <Routes location={location}>
         <Route path="/" element={<DiaryCover />} />
         <Route path="/chapter/1" element={<ChapterOnboarding />} />
-        <Route path="/chapter/2" element={<Stub title="🔒 Chapter 2: Locking My Diary" color="#C3B1E1" />} />
+        <Route path="/chapter/2" element={<ChapterDevices />} />
         <Route path="/chapter/3" element={<Stub title="📱 Chapter 3: Unfriending" color="#A7C7E7" />} />
         <Route path="/chapter/4" element={<Stub title="💳 Chapter 4: Splitting the Bill" color="#B5EAD7" />} />
         <Route path="/chapter/5" element={<Stub title="📒 Chapter 5: Address Book" color="#FFDAA1" />} />
