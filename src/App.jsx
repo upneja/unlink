@@ -6,6 +6,7 @@ import ChapterDevices from './pages/ChapterDevices'
 import ChapterSocial from './pages/ChapterSocial'
 import ChapterFinances from './pages/ChapterFinances'
 import ChapterResources from './pages/ChapterResources'
+import FreshStartDashboard from './pages/FreshStartDashboard'
 
 // Stub pages — will be replaced in subsequent tasks
 const Stub = ({ title, color }) => (
@@ -26,7 +27,7 @@ function AppInner() {
         <Route path="/chapter/3" element={<ChapterSocial />} />
         <Route path="/chapter/4" element={<ChapterFinances />} />
         <Route path="/chapter/5" element={<ChapterResources />} />
-        <Route path="/fresh-start" element={<Stub title="✨ Fresh Start Dashboard" color="#FFD700" />} />
+        <Route path="/fresh-start" element={<FreshStartDashboard />} />
       </Routes>
     </DiaryBook>
   )
