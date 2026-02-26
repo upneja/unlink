@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pink: #FFB5C2;
+  --lavender: #C3B1E1;
+  --blue: #A7C7E7;
+  --mint: #B5EAD7;
+  --gold: #FFD700;
+  --cream: #FFF8F0;
+  --charcoal: #4A4A4A;
+  --red-line: #FFAAAA;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #e8dfd8;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, #d4c4b8 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, #e0d4cc 0%, transparent 60%);
+  min-height: 100vh;
+  font-family: "Nunito", sans-serif;
+  color: var(--charcoal);
+  overflow-x: hidden;
+}
+
+/* Lined paper effect */
+.lined-paper {
+  background-color: var(--cream);
+  background-image:
+    linear-gradient(90deg, transparent 48px, var(--red-line) 48px, var(--red-line) 50px, transparent 50px),
+    repeating-linear-gradient(
+      transparent,
+      transparent 30px,
+      #d4d0c8 30px,
+      #d4d0c8 31px
+    );
+  background-attachment: local;
+}
+
+/* Spiral binding dots */
+.spiral-binding {
+  background:
+    radial-gradient(circle at 50% 50%, #888 0%, #555 40%, transparent 41%) 0 20px / 24px 24px repeat-y,
+    linear-gradient(#777, #777) 50% 0 / 2px 100% no-repeat;
+}
+
+/* Gel pen strikethrough animation */
+@keyframes strikethrough {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+.gel-pen-strike {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: strikethrough 0.4s ease-out forwards;
+}
+
+/* Sticker pop */
+@keyframes stickerPop {
+  0% { transform: scale(0) rotate(-10deg); }
+  60% { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.sticker-pop {
+  animation: stickerPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Page perspective for 3D flip */
+.diary-perspective {
+  perspective: 2000px;
+}
+
+/* Font utilities */
+.font-handwriting { font-family: "Caveat", cursive; }
+.font-body { font-family: "Nunito", sans-serif; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #d4c4b8; }
+::-webkit-scrollbar-thumb { background: var(--lavender); border-radius: 3px; }
