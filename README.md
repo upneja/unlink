@@ -1,48 +1,81 @@
-# 💔 UNLINK — The Digital Breakup Kit
-
-> *"Your diary. Your data. Your fresh start."*
+# Unlink — The Digital Breakup Kit
 
 **Live demo:** https://unlink-opal.vercel.app
 
-A beautifully designed, interactive web app that guides people through the process of digitally untangling from an abusive or controlling relationship. Styled as an early-2000s teenage diary — handwritten fonts, pastel colors, stickers, lock-and-key motifs — it transforms an overwhelming, terrifying process into something that feels intimate, warm, and empowering.
-
-Built for the **"Safety in the Digital Age"** hackathon.
+A privacy-first safety toolkit for survivors of controlling relationships, styled as an early-2000s teenage diary. Built for the **"Safety in the Digital Age"** hackathon.
 
 ---
 
-## What It Does
+## What It Is
 
-UNLINK is structured as diary "chapters." The user works through them like pages of a journal.
+Leaving a controlling relationship is terrifying. The digital aftermath — shared accounts, stalkerware, location tracking, joint finances — can keep survivors tethered and vulnerable long after they've physically left. Unlink guides them through cutting those ties, one diary page at a time.
 
-| Chapter | Title | What It Covers |
+The app is structured as six diary "chapters." The user works through them like pages of a journal, checking off items as they go. Chapter 1 asks six assessment questions; the answers personalize every checklist that follows (e.g., if you share a phone plan, that step gets highlighted in Chapter 4).
+
+**Zero data leaves your device.** No backend. No accounts. No analytics. Everything — checklist progress, assessment answers, the "Dear Future Me" letter — lives in browser `localStorage`. Closing the tab doesn't erase it. Clearing your browser data does.
+
+---
+
+## Chapters
+
+| # | Title | Covers |
 |---|---|---|
-| Cover | Open My Diary | Animated entry point with lock unlock sequence |
-| Chapter 1 | I'm Starting Over | 6-question assessment → personalized checklist |
-| Chapter 2 | Locking My Diary | Devices, passwords, 2FA, stalkerware check |
-| Chapter 3 | Unfriending & Unfollowing | Social media, location sharing, platform guides |
-| Chapter 4 | Splitting the Bill | Finances, phone plans, FCC Safe Connections Act |
-| Chapter 5 | My New Address Book | Hotlines, evidence tips, safety circle |
-| Fresh Start | My Fresh Start | Progress dashboard, achievements, "Dear Future Me" |
+| Cover | Open My Diary | Animated entry with lock-unlock sequence |
+| 1 | I'm Starting Over | 6-question assessment → personalized checklist |
+| 2 | Locking My Diary | Devices, passwords, 2FA, stalkerware check |
+| 3 | Unfriending & Unfollowing | Social media, location sharing, platform-specific guides |
+| 4 | Splitting the Bill | Finances, phone plans, FCC Safe Connections Act |
+| 5 | My New Address Book | DV hotlines, evidence tips, safety circle |
+| 6 | My Fresh Start | Progress dashboard, achievements, "Dear Future Me" |
 
-**Key design principles:**
-- Zero data collection — everything stays on the user's device (localStorage)
-- No backend, no accounts, no tracking
-- Mobile-first (designed for use on a phone)
-- Warm, non-clinical aesthetic that reduces anxiety
+---
+
+## Design Philosophy
+
+The aesthetic is deliberate: **early-2000s teenage diary** — cream lined paper, Caveat handwriting font, pastel chapter colors, sticker pops, a 3D page-flip animation. Every design choice is a rejection of clinical, sterile "safety tool" UI.
+
+Survivors already feel surveilled and overwhelmed. The goal was to make this feel intimate and warm — like writing in a journal you keep under your pillow, not filling out a form at a government office.
+
+**Key principles:**
+- Privacy by architecture, not policy — no server to breach because there is no server
+- Mobile-first — designed for the phone in your pocket, not a desktop
+- Warm, non-clinical aesthetic to reduce anxiety at a high-stress moment
+- Personalized via assessment so irrelevant steps don't add noise
+
+**Stats that shaped it:**
+- 85% of DV shelters report abusers use technology for stalking or control (NNEDV)
+- 1 in 4 women experience intimate partner violence (WHO)
+- Deepfake content targeting survivors grew 900% between 2023–2025
+- The most dangerous window for a survivor is immediately after leaving — digital safety is critical
 
 ---
 
 ## Tech Stack
 
+| Layer | Choice |
+|---|---|
+| Framework | Vite + React 19 |
+| Routing | React Router v7 |
+| Animations | Framer Motion — page flip, sticker pops, confetti |
+| Styling | Tailwind CSS v3 + custom CSS |
+| Fonts | Caveat (handwriting) + Nunito (body) via Google Fonts |
+| State | React Context + `localStorage` |
+| Deploy | Vercel |
+
+No backend. No database. No auth.
+
+---
+
+## Running Locally
+
+```bash
+git clone https://github.com/upneja/unlink.git
+cd unlink
+npm install
+npm run dev
 ```
-Framework:     Vite + React 18
-Routing:       React Router v6
-Animations:    Framer Motion (page flip, sticker pops, confetti)
-Styling:       Tailwind CSS v3 + custom CSS
-Fonts:         Google Fonts — Caveat (handwriting) + Nunito (body)
-State:         React Context + localStorage
-Deploy:        Vercel
-```
+
+Opens at http://localhost:5173
 
 ---
 
@@ -51,40 +84,57 @@ Deploy:        Vercel
 ```
 src/
 ├── components/
-│   ├── ChecklistItem.jsx     # Animated checklist row with sticker pop
-│   ├── DiaryBook.jsx         # Outer shell — spine, page flip animation
-│   ├── DiaryEntry.jsx        # Lined paper block with handwriting font
-│   ├── NavigationButtons.jsx # Back/Next page nav (shared)
-│   ├── PageHeader.jsx        # Animated chapter header
-│   ├── PlatformCard.jsx      # Expandable social media step-guide card
-│   ├── ProgressSpine.jsx     # Spine navigation dots
-│   ├── StickerBurst.jsx      # Confetti celebration animation
-│   └── Stickers.jsx          # Inline SVG sticker library
+│   ├── ChecklistItem.jsx      # Animated checklist row with sticker pop
+│   ├── DiaryBook.jsx          # Outer shell — spine, 3D page flip
+│   ├── DiaryEntry.jsx         # Lined paper block with handwriting font
+│   ├── NavigationButtons.jsx  # Back/Next page nav
+│   ├── PageHeader.jsx         # Animated chapter header
+│   ├── PlatformCard.jsx       # Expandable social media step-guide card
+│   ├── ProgressSpine.jsx      # Spine navigation dots
+│   ├── StickerBurst.jsx       # Confetti celebration animation
+│   └── Stickers.jsx           # Inline SVG sticker library
 ├── context/
-│   └── DiaryContext.jsx      # Global state + localStorage persistence
+│   └── DiaryContext.jsx       # Global state + localStorage persistence
 ├── pages/
-│   ├── DiaryCover.jsx        # Animated landing page
-│   ├── ChapterOnboarding.jsx # Chapter 1 — Assessment quiz
-│   ├── ChapterDevices.jsx    # Chapter 2 — Devices & passwords
-│   ├── ChapterSocial.jsx     # Chapter 3 — Social media
-│   ├── ChapterFinances.jsx   # Chapter 4 — Finances
-│   ├── ChapterResources.jsx  # Chapter 5 — Emergency resources
+│   ├── DiaryCover.jsx         # Animated landing page
+│   ├── ChapterOnboarding.jsx  # Ch. 1 — Assessment quiz
+│   ├── ChapterDevices.jsx     # Ch. 2 — Devices & passwords
+│   ├── ChapterSocial.jsx      # Ch. 3 — Social media
+│   ├── ChapterFinances.jsx    # Ch. 4 — Finances
+│   ├── ChapterResources.jsx   # Ch. 5 — Emergency resources
 │   └── FreshStartDashboard.jsx # Progress + Dear Future Me
-└── index.css                 # Global styles, paper texture, animations
+└── index.css                  # Global styles, paper texture, animations
 ```
 
 ---
 
-## Running Locally
+## State Model
 
-```bash
-git clone <repo-url>
-cd unlink
-npm install
-npm run dev
+All state lives in `DiaryContext` and persists to `localStorage` under the key `unlink_diary`. Nothing is ever sent anywhere.
+
+```ts
+{
+  assessment: {
+    sharedPhonePlan: boolean | null,
+    jointBankAccount: boolean | null,
+    sharedStreaming: boolean | null,
+    locationSharingOn: boolean | null,
+    sharedCloud: boolean | null,
+    sharedSocialLogins: boolean | null,
+  },
+  checklist: {
+    ch2: { [itemId: string]: boolean },
+    ch3: { [itemId: string]: boolean },
+    ch4: { [itemId: string]: boolean },
+  },
+  achievements: string[],     // 'ch2_complete' | 'ch3_complete' | 'ch4_complete'
+  dearFutureMe: string,
+  safetyCircle: string,
+  assessmentComplete: boolean,
+}
 ```
 
-Open http://localhost:5173
+Chapter 1 answers personalize subsequent chapters — e.g., phone plan item is visually flagged if `sharedPhonePlan: true`.
 
 ---
 
@@ -106,71 +156,7 @@ Open http://localhost:5173
 ### Typography
 
 - **Headers / diary entries:** [Caveat](https://fonts.google.com/specimen/Caveat) — handwritten feel
-- **Body text / labels:** [Nunito](https://fonts.google.com/specimen/Nunito) — rounded, friendly, readable
-
-### Key CSS Classes
-
-| Class | Effect |
-|---|---|
-| `.lined-paper` | Cream background with ruled lines + red margin |
-| `.font-handwriting` | Caveat font |
-| `.font-body` | Nunito font |
-| `.diary-perspective` | 3D perspective container for page flip |
-
----
-
-## State Model
-
-All state lives in `DiaryContext` and persists to `localStorage` under key `unlink_diary`.
-
-```ts
-{
-  assessment: {
-    sharedPhonePlan: boolean | null,
-    jointBankAccount: boolean | null,
-    sharedStreaming: boolean | null,
-    locationSharingOn: boolean | null,
-    sharedCloud: boolean | null,
-    sharedSocialLogins: boolean | null,
-  },
-  checklist: {
-    ch2: { [itemId: string]: boolean },
-    ch3: { [itemId: string]: boolean },
-    ch4: { [itemId: string]: boolean },
-  },
-  achievements: string[],       // 'ch2_complete' | 'ch3_complete' | 'ch4_complete'
-  dearFutureMe: string,
-  safetyCircle: string,
-  assessmentComplete: boolean,
-}
-```
-
-Chapter 1 assessment answers personalize later chapters (e.g., phone plan item is highlighted if `sharedPhonePlan: true`).
-
----
-
-## Deploying
-
-The project deploys to Vercel. `vercel.json` configures SPA rewrites so all routes serve `index.html`.
-
-```bash
-vercel --prod
-```
-
----
-
-## Design Handoff (for Figma)
-
-This codebase was designed to be exported to Figma via [html.to.code](https://www.builder.io/blog/html-to-figma). The visual design is implemented entirely in code (no external assets required) so it can be:
-
-1. Exported to Figma for visual refinement
-2. Re-imported with updated assets/styles
-
-**Figma designer focus areas:**
-- Sticker assets (currently inline SVGs in `src/components/Stickers.jsx`)
-- Background textures and paper effects (currently CSS in `src/index.css`)
-- Chapter divider tab colors and the diary spine
-- Celebration/achievement animations
+- **Body / labels:** [Nunito](https://fonts.google.com/specimen/Nunito) — rounded, friendly, readable
 
 ---
 
@@ -183,23 +169,8 @@ This codebase was designed to be exported to Figma via [html.to.code](https://ww
 | RAINN | 1-800-656-4673 |
 | Legal Aid | lawhelp.org |
 
-**FCC Safe Connections Act (2022):** Wireless carriers are required by law to let domestic violence survivors separate from shared phone plans at no cost.
+**FCC Safe Connections Act (2022):** Wireless carriers must let DV survivors separate from shared phone plans at no cost.
 
 ---
 
-## Privacy
-
-UNLINK collects **zero data**. There is no backend, no analytics, no tracking. Everything the user enters (checklist progress, assessment answers, their "Dear Future Me" letter, safety circle contacts) stays on their device in browser localStorage. Clearing browser data removes everything.
-
----
-
-## Stats (for pitch)
-
-- **85%** of DV shelters report abusers use technology for stalking/control (NNEDV)
-- **1 in 4 women** experience intimate partner violence (WHO)
-- Deepfake content targeting survivors increased **900%** between 2023–2025
-- The most dangerous window for a survivor is **immediately after leaving** — digital safety is critical
-
----
-
-*Built with 💜 for the Safety in the Digital Age hackathon.*
+*Built for the Safety in the Digital Age hackathon.*
